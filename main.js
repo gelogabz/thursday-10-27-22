@@ -1,6 +1,18 @@
-let items = {
-    cart: []
-};
+// items = JSON.parse(localStorage.getItem('add-item'));
+// console.log(items);
+
+
+let items;
+
+if ((items = JSON.parse(sessionStorage.getItem('add-item'))) == null) {
+    items = {
+        cart: []
+    };
+    showCart();
+} else {
+    items = JSON.parse(sessionStorage.getItem('add-item'));
+    showCart();
+}
 
 function addItems() {
     let cartItem = document.getElementById('add-item').value;
@@ -8,7 +20,7 @@ function addItems() {
     items.cart.push({ item: cartItem, price: itemPrice });
     console.log(cartItem, itemPrice);
     showCart();
-    localStorage.setItem('add-item', JSON.stringify(items));
+    sessionStorage.setItem('add-item', JSON.stringify(items));
 };
 
 function showCart() {
